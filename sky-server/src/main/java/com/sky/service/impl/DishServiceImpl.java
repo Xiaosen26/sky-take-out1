@@ -50,9 +50,6 @@ public class DishServiceImpl implements DishService {
         List<DishFlavor> flavors = dishDTO.getFlavors();
 
         if(flavors!=null&&flavors.size()>0){
-//            for (DishFlavor dishFlavor:flavors) {
-//                dishFlavor.setDishId(dishId);
-//            }
             flavors.forEach(dishFlavor -> {
                 dishFlavor.setDishId(dishId);
             });
@@ -139,5 +136,27 @@ public class DishServiceImpl implements DishService {
 
         }
 
+    }
+    /**
+     * 分类id查询菜品
+     * @param categoryId
+     * @return
+     */
+    public List<Dish> getByCategoryId(Long categoryId) {
+        //根据分类id查询菜品
+        List<Dish> dish = dishMapper.getByCategoryId(categoryId);
+        return dish;
+    }
+
+    /**
+     * 修改菜品的售卖情况
+     * @param status
+     * @param id
+     */
+    public void updateDishStatus(Integer status, Long id) {
+        Dish dish=new Dish();
+        dish.setStatus(status);
+        dish.setId(id);
+        dishMapper.update(dish);
     }
 }
